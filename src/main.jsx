@@ -5,6 +5,7 @@ import './index.css'
 import App from './App.jsx'
 import Movies from './components/Movies';
 import Error from './components/Error.jsx';
+import AllMovies from './components/AllMovies.jsx';
 
 const appRouter = createBrowserRouter([
   {
@@ -13,9 +14,13 @@ const appRouter = createBrowserRouter([
     errorElement: <Error />
   },
   {
-    path: '/movies',
+    path: '/movies/:movieCategory',
     element: <Movies />,
     errorElement: <Error />
+  },
+  {
+    path: '/movies',
+    element: <AllMovies />
   }
 ])
 createRoot(document.getElementById('root')).render(

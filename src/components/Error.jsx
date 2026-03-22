@@ -1,5 +1,5 @@
-import { useRouteError } from 'react-router';
-import { Link } from 'react-router';
+import { useRouteError, Link } from 'react-router';
+
 const Error = () => {
     const error = useRouteError(); // code not found 404 comes from this
     return (

@@ -2,7 +2,7 @@ function Header() {
     return (
         <header>
             <div className='header'>
-                <h2>Movie Flix</h2>
+                <h2>SimCinema</h2>
                 <nav className='nav'>
                     <select>
                         <option value="">Select Language</option>
