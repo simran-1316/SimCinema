@@ -6,7 +6,7 @@ function Header() {
                 <nav className='nav'>
                     <select>
                         <option value="">Select Language</option>
-                        <option value='Hinid'>Hindi</option>
+                        <option value='Hindi'>Hindi</option>
                         <option value="English">English</option>
                     </select>
                     <input placeholder='Search' type='text' />

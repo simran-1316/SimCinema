@@ -3,8 +3,16 @@ import Header from './components/Header.jsx'
 import { movies } from './data';
 import { Link } from 'react-router-dom';
 import MovieCard from './components/MovieCard.jsx';
+import OnlineStatusCheck from './hooks/OnlineStatusCheck';
 
 function App() {
+  const onlineStatus = OnlineStatusCheck();
+  if(onlineStatus===false) 
+    return (<div class = 'onlineStatus'>
+       <h1> Oops! You are Offline</h1>
+       <p>Please Check your internet connection</p>
+        </div>
+    );
   return (
     <>
       <div className='page'>

@@ -1,4 +1,4 @@
-import { useRouteError, Link } from 'react-router';
+import { useRouteError, Link } from 'react-router-dom';
 
 const Error = () => {
     const error = useRouteError(); // code not found 404 comes from this

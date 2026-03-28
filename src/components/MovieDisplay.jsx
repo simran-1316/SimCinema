@@ -1,0 +1,113 @@
+import { useEffect, useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { options } from '../data';
+import './MovieDisplay.css'
+import OnlineStatusCheck from '../hooks/OnlineStatusCheck';
+
+const MovieDisplay = () => {
+    const { movieId } = useParams();    // isse movie ki id aa rahi h 
+    const navigate = useNavigate();
+    const onlineStatus = OnlineStatusCheck();
+    console.log(onlineStatus)
+
+    const [movie, setMovie] = useState(null);
+    const [trailerkey, setTrailerKey] = useState('');
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState('');
+    const [play, setPlay] = useState(false);
+
+    const fetchMovieDetails = async () => {
+        try {
+            setLoading(true);
+            const res = await fetch(
+                `https://api.themoviedb.org/3/movie/${movieId}`,
+                options
+            );
+            const data = await res.json();
+            setMovie(data);
+        } catch {
+            setError('Failed to load movie details');
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const fetchTrailer = async () => {
+        try {
+            const res = await fetch(
+                `https://api.themoviedb.org/3/movie/${movieId}/videos`,
+                options
+            );
+            const data = await res.json();
+
+            const trailer = data.results.find(
+                (vid) => vid.type === 'Trailer' && vid.site === 'YouTube'
+            );
+
+            if (trailer) setTrailerKey(trailer.key);
+        } catch {
+            console.log('Trailer not found');
+        }
+    };
+
+    useEffect(() => {
+        fetchMovieDetails();
+        fetchTrailer();
+    }, [movieId]);
+
+    if (loading)
+        return (
+            <div className='md-shimmer'>
+                <h1 className='md-shimmer-text'>SimCinema</h1>
+            </div>
+        );
+    if (onlineStatus===false)
+        return (<div class='onlineStatus'>
+            <h1> Oops! You are Offline</h1>
+            <p>Please Check your internet connection</p>
+        </div>
+        );
+
+    if (error) return <p className='md-error'>{error}</p>
+
+    return (
+        <div className='md-page'>
+            <div className='md-head'>
+                <button className='md-back-btn' onClick={() => navigate(-1)}>
+                    ← Back
+                </button>
+            </div>
+
+            <div
+                className='md-hero'
+                style={{
+                    backgroundImage: `url(https://image.tmdb.org/t/p/original${movie?.backdrop_path})`,
+                }} >
+                <div className="md-hero-content">
+                    <h1 className='md-title'>{movie?.title}</h1>
+                    <p className='md-overview'>{movie?.overview}</p>
+
+                    {trailerkey && (
+                        <button className='md-play-btn' onClick={() => setPlay(true)}>
+                            ⏵Play
+                        </button>
+                    )}
+
+                </div>
+            </div>
+
+            {play && (
+                <div className='md-trailer-overlay' onClick={() => setPlay(false)}>
+                    <iframe
+                        src={`https://www.youtube.com/embed/${trailerkey}?autoplay=1`}
+                        allow='autoplay; fullscreen'
+                        title='Trailer'
+                    />
+                </div>
+            )}
+
+
+        </div>
+    )
+}
+export default MovieDisplay;

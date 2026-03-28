@@ -1,0 +1,102 @@
+
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 3rem;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.logo {
+  color: var(--gold-primary);
+  font-size: 1.8rem;
+  cursor: pointer;
+}
+
+.back-btn {
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--gold-primary);
+  background: transparent;
+  color: var(--gold-light);
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.back-btn:hover {
+  background: var(--gold-primary);
+  color: black;
+}
+
+
+.movies-page {
+  padding: 2rem;
+}
+
+
+.filter-container {
+  margin-bottom: 2rem;
+}
+
+.filter-container select {
+  padding: 0.5rem;
+  background: var(--bg-card);
+  color: var(--gold-light);
+  border: 1px solid var(--gold-primary);
+  border-radius: 4px;
+}
+
+
+.movies-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 1.5rem;
+}
+
+
+.movie-card {
+  background: var(--bg-card);
+  border-radius: 6px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.movie-card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+.movie-card:hover {
+  transform: scale(1.08);
+  cursor: pointer;
+}
+
+
+.shimmer-card {
+  height: 220px;
+  background: linear-gradient(
+    90deg,
+    #1a1a1a 25%,
+    #2a2a2a 50%,
+    #1a1a1a 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.2s infinite;
+  border-radius: 6px;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.error-text,
+.no-results {
+  text-align: center;
+  color: var(--gold-light);
+  margin-top: 2rem;
+}
