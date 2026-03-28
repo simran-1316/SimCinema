@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 const Footer = () => {
     
     return (
@@ -8,10 +9,14 @@ const Footer = () => {
                     <p>Stream unlimited movies & shows anytime, anywhere.</p>
 
                     <div className="footer-links">
-                        <a href="#">Home</a>
-                        <a href="#">Movies</a>
-                        <a href="#">TV Shows</a>
-                        <a href="#">Contact</a>
+                    <Link to="/">Home</Link>
+                    <Link to="/movies">Movies</Link>
+                    <Link to="/movies">TV Shows</Link>
+                    <a 
+                    href="https://www.linkedin.com/in/simran-rawat-126a83380"
+                    target="_blank"
+                    rel="noreferrer">Contact
+                    </a>
                     </div>
 
                     <p className="copyright">
