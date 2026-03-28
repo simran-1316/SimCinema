@@ -3,18 +3,21 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { options } from '../data';
 import './MovieDisplay.css'
 import OnlineStatusCheck from '../hooks/OnlineStatusCheck';
+import { useContext } from 'react';
+import LanguageContext from '../contexts/LanguageContext';
 
 const MovieDisplay = () => {
-    const { movieId } = useParams();    // isse movie ki id aa rahi h 
+    const { movieId } = useParams();    
     const navigate = useNavigate();
     const onlineStatus = OnlineStatusCheck();
-    console.log(onlineStatus)
+    
 
     const [movie, setMovie] = useState(null);
     const [trailerkey, setTrailerKey] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const [play, setPlay] = useState(false);
+     const { language } = useContext(LanguageContext);
 
     const fetchMovieDetails = async () => {
         try {
@@ -62,7 +65,7 @@ const MovieDisplay = () => {
             </div>
         );
     if (onlineStatus===false)
-        return (<div class='onlineStatus'>
+        return (<div className='onlineStatus'>
             <h1> Oops! You are Offline</h1>
             <p>Please Check your internet connection</p>
         </div>
@@ -74,7 +77,7 @@ const MovieDisplay = () => {
         <div className='md-page'>
             <div className='md-head'>
                 <button className='md-back-btn' onClick={() => navigate(-1)}>
-                    ← Back
+                    {language === 'Hindi' ? '← वापस जाएं' : '← Back'}
                 </button>
             </div>
 
@@ -89,7 +92,7 @@ const MovieDisplay = () => {
 
                     {trailerkey && (
                         <button className='md-play-btn' onClick={() => setPlay(true)}>
-                            ⏵Play
+                            {language === 'Hindi' ? 'चलाएँ"' : '⏵Play'}
                         </button>
                     )}
 

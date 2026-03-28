@@ -1,18 +1,25 @@
-function Header() {
+import { useContext } from "react";
+import LanguageContext from '../contexts/LanguageContext';
+
+const Header = () => {
+    const { language, setLanguage } = useContext(LanguageContext);
     return (
         <header>
             <div className='header'>
-                <h2>SimCinema</h2>
+                <h2>{language === 'Hindi' ? 'सिमसिनेमा' : 'SimCinema'}</h2>
                 <nav className='nav'>
-                    <select>
-                        <option value="">Select Language</option>
-                        <option value='Hindi'>Hindi</option>
+                    <select 
+                        value={language}
+                        onChange={(e)=> setLanguage(e.target.value)} >
+                        <option value="">
+                            { language === 'Hindi' ? 'भाषा चुनें' : 'Select Language'}
+                            </option>
+                        <option value='Hindi'>हिंदी</option>
                         <option value="English">English</option>
-                    </select>
-                    <input placeholder='Search' type='text' />
+                    </select>      
                 </nav>
             </div>
         </header>
-    )
-}
+    );
+};
 export default Header;

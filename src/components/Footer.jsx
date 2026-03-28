@@ -1,7 +1,5 @@
-import { useContext } from 'react';
-import LanguageContext from '../contexts/LanguageContext';
 const Footer = () => {
-    const { language, setLanguage } = useContext(LanguageContext);
+    
     return (
         <>
             <footer className="footer">
