@@ -1,4 +1,4 @@
-import { useRouteError, Link } from 'react-router-dom'; 
+import { Link } from 'react-router-dom'; 
 const MovieCard = ({ image, title,category }) => {
   return (
     <>
